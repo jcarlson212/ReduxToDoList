@@ -17,7 +17,7 @@ function ToDoList({ todos, max_items, current_page }) {
     console.log(current_todos)
     return (
         <div>
-            <Container maxWidth="sm">
+            <Container maxWidth="medium" minHeight="large">
                 {current_todos.map((todo) => <Todo key={todo.id} data={todo}/> )}
             </Container>
         </div>

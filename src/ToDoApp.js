@@ -15,17 +15,24 @@ function ToDoApp({ firstname, lastname, max_page, addToDo, changePage }) {
 
 
     return (
-        <div>
+        <div class="todo-list-app">
             <h1 class="title">
                 {firstname + " " + lastname}'s To Do List
             </h1>
-            <ToDoList />
-            <Pagination count={max_page} variant="outlined" size="large" onChange={(event) => changePage(parseInt(event.target.textContent))} />
-            <form noValidate autoComplete="off">
-                <TextField id="name" label="Name" variant="outlined" onChange={(new_name) => set_add_todo_name(new_name.target.value)} />
-                <TextField id="description" label="Description" variant="outlined" onChange={(new_des) => set_add_todo_description(new_des.target.value)} />
-                <Button onClick={() => addToDo(add_todo_name, add_todo_description)} variant="contained">Add Todo</Button>
-            </form>
+            <div>
+                <ToDoList />
+            </div>
+            <div>
+                <Pagination count={max_page} variant="outlined" size="large" onChange={(event, value) => changePage(value)} />
+            </div>
+            <div>
+                <form class="add-todo-form" noValidate autoComplete="off">
+                    <TextField id="name" label="Name" variant="outlined" onChange={(new_name) => set_add_todo_name(new_name.target.value)} />
+                    <TextField id="description" label="Description" variant="outlined" onChange={(new_des) => set_add_todo_description(new_des.target.value)} />
+                    <Button onClick={() => addToDo(add_todo_name, add_todo_description)} variant="contained">Add Todo</Button>
+                </form>
+            </div>
+            
             
         </div>
     );

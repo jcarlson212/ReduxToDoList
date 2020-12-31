@@ -21,7 +21,10 @@ export default function(state = initialState, action) {
             allIds: [...state.allIds, id],
             byIds: {
                 ...state.byIds,
-                [id]: content,
+                [id]: {
+                    ...content,
+                    id: id,
+                },
             }
         };
     }
@@ -40,8 +43,13 @@ export default function(state = initialState, action) {
     }
     case REMOVE_TODO:{
         const { id } = action.payload;
+        const new_max_page = (state.allIds.length % state.max_items_per_page === 1 && state.allIds.length > state.max_items_per_page) ? (state.max_page - 1) : state.max_page;
+        const current_page = (new_max_page < state.max_page && state.current_page === state.max_page) ? state.current_page - 1 : state.current_page; 
+ 
         return {
             ...state,
+            max_page: new_max_page,
+            current_page,
             allIds: state.allIds.filter(val => val !== id),
             byIds: {
                 ...state.byIds,
